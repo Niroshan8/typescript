@@ -99,8 +99,140 @@
 
 // Arrays Types
 
-const nums: number[] = [1, 2];
-const str: string[] = ["one", "two", "three"];
-console.log(nums);
-console.log(str);
+// const nums: number[] = [1, 2];
+// const str: string[] = ["one", "two", "three"];
+// console.log(nums);
+// console.log(str);
+
+// const itemes: string[] = [];
+// itemes.push("keyboard");
+// console.log(itemes);
+
+// const numList: number[] = [];
+// numList.push(20);
+// console.log(numList);
+
+// const items: Array<string> = ["something"];
+// console.log(items);
+
+// const numbers: Array<number> = [1, 2, 3, 4];
+// console.log(numbers);
+
+// // ---------- Multi Dimmensional Arrays -----------------
+
+// const singleDi: number[] = [1, 2, 3, 4, 5];
+// const multiDi: number[][] = [[1, 2, 3, 4, 5]];
+// const triple: number[][][] = [[[1, 2, 3, 4, 5]]];
+
+// console.log(singleDi);
+// console.log(multiDi);
+// console.log(triple);
+
+// //  --------------- objects ----------------------
+
+// const person: { firstName: string; lastName: string; age: number } = {
+//   firstName: "John",
+//   lastName: "Doe",
+//   age: 10,
+// };
+
+// console.log(`Name: ${person.firstName} ${person.lastName}, Age: ${person.age}`);
+
+// // function parameters
+
+// function printUser(): { name: string; age: number; location: string } {
+//   return {
+//     name: "Niroshan",
+//     age: 20,
+//     location: "Sri Lanka",
+//   };
+// }
+
+// const res = printUser();
+// console.log(res);
+
+//---------- Custoum Type Aliases ----------------
+
+// type User = {
+//   name: string;
+//   age: number;
+//   location: string;
+// };
+
+// const printUserInfo = (user: User) => {
+//   return `Name: (${user.name}) Age: (${user.age}) Location: (${user.location})`;
+// };
+
+// const res = printUserInfo({ name: "Alex", age: 20, location: "USA" });
+// console.log(res);
+
+// ----------------- Optional Properties ---------------------
+
+// type User = {
+//   name: string;
+//   age?: number;
+//   readonly location: string;
+// };
+
+// const user: User = {
+//   name: "Niroshan",
+//   // age: 20,
+//   location: "Sri Lanka",
+// };
+
+// // user.location = "saman"; --> Cannot assign to 'location' because it is a read-only property.
+
+// console.log(`Name: ${user.name}, Age: ${user.age}, Location: ${user.location}`);
+
+// ------- Intersection Type (&) -------------
+// Intersection Type is combine multiple types in to a single type that includes all the properties and methods of each constituent type
+
+// type UserInfo = {
+//   first: string;
+//   last: string;
+//   age: number;
+// };
+
+// type AccountDetails = {
+//   email: string;
+//   password: string;
+// };
+
+// type User = UserInfo & AccountDetails;
+
+// const niroshan: User = {
+//   first: "Niroshan",
+//   last: "Kavinda",
+//   age: 20,
+//   email: "niroshanKavinda@gmail.com",
+//   password: "nirod4532",
+// };
+
+// console.log(
+//   `Name: ${niroshan.first} ${niroshan.last} Age: ${niroshan.age} Email: ${niroshan.email} Password: ${niroshan.password}`,
+// );
+
+// --------------- Unions (|) ---------------------
+
+let password: string | number = 20;
+
+type UserInfo = {
+  first: string;
+  last: string;
+  age: number;
+};
+
+type AccountDetails = {
+  email: string;
+  password: string;
+};
+
+let user: UserInfo | AccountDetails = {
+  email: "someone@gmail.com",
+  password: "sdsdas123",
+};
+
+const items: (number | string)[] = [1, 2, 3, "hello"];
+
+console.log(items);
 
