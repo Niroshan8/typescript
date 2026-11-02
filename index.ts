@@ -492,4 +492,246 @@
 
 //------------- Declaration merging ----------------
 
+// original interface
+// interface Car {
+//   brand: string;
+//   start(): void;
+// }
 
+// // Declaration merging (interface extention)
+// interface Car {
+//   model: string;
+//   stop(): void;
+// }
+
+// const myCar: Car = {
+//   brand: "BMW",
+//   model: "M3",
+//   start() {
+//     console.log("Start");
+//   },
+//   stop() {
+//     console.log("Stop");
+//   },
+// };
+
+// myCar.start();
+// myCar.stop();
+
+// ---------------- Grnerics -----------------
+
+// function printNumber(item: number, deafultValue: number): [number, number] {
+//   return [item, deafultValue];
+// }
+
+// function printString(item: string, deafultValue: string): [string, string] {
+//   return [item, deafultValue];
+// }
+
+// function printBool(item: boolean, deafultValue: boolean): [boolean, boolean] {
+//   return [item, deafultValue];
+// }
+
+// const num = printNumber(1, 2);
+// const str = printString("hello", "world");
+// const bool = printBool(true, false);
+
+// console.log(num);
+// console.log(str);
+// console.log(bool);
+
+// not suitable solution (not using typescript)
+
+// function printAny(item: any, deafultValue: any): [any, any] {
+//   return [item, deafultValue];
+// }
+
+// const num = printAny(1, "something");
+// console.log(num);
+
+// real solutin using <Type>
+
+// function uniqueDataTypesFunc<T>(item: T, defaultValue: T): [T, T] {
+//   return [item, defaultValue];
+// }
+
+// const num = uniqueDataTypesFunc<number>(10, 20);
+// const str = uniqueDataTypesFunc<string>("hello", "world");
+// const bool = uniqueDataTypesFunc<boolean>(true, false);
+
+// console.log(num);
+// console.log(str);
+// console.log(bool);
+
+// -----------------------
+
+// interface Dog {
+//   name: string;
+//   breed: string;
+// }
+
+// const dog1 = uniqueDataTypesFunc<Dog>(
+//   { name: "Buddy", breed: "Labrador" },
+//   { name: "Deafult", breed: "Unknown" },
+// );
+
+// console.log(dog1);
+
+// using key value pairs
+
+// function getRandomKeyValuePairs<T>(obj: { [key: string]: T }): {
+//   key: string;
+//   value: T;
+// } {
+//   const keys = Object.keys(obj);
+//   const randKey = keys[Math.floor(Math.random() * keys.length)];
+//   return { key: randKey, value: obj[randKey] };
+// }
+
+// const stringObject = { a: "apple", b: "bannna", c: "cherry" };
+// const randomStringPair = getRandomKeyValuePairs<string>(stringObject);
+// console.log(randomStringPair);
+
+// const numberObject = { one: 1, two: 2, three: 3 };
+// const randomNumberPair = getRandomKeyValuePairs<number>(numberObject);
+// console.log(randomNumberPair);
+
+// ------- consition base example for <>
+
+// function filterArray<T>(array: T[], condition: (item: T) => boolean): T[] {
+//   return array.filter((item) => condition(item));
+// }
+
+// const numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// const evenNumbers = filterArray<number>(numberArray, (num) => num % 2 === 0);
+// console.log(evenNumbers);
+
+// const strinArr = ["apple", "bannna", "cherry", "date"];
+// const shortWords = filterArray<string>(strinArr, (word) => word.length < 6);
+// console.log(shortWords);
+
+// interface Fruit {
+//   name: string;
+//   color: string;
+// }
+
+// const fruitArray: Fruit[] = [
+//   { name: "Apple", color: "Red" },
+//   { name: "Banana", color: "Yellow" },
+//   { name: "Cherry", color: "Red" },
+// ];
+
+// const redFruits = filterArray<Fruit>(
+//   fruitArray,
+//   (fruit) => fruit.color == "Red",
+// );
+
+// console.log(redFruits);
+
+//--- multiple type paramrters
+// function reversePair<T, U>(value1: T, value2: U): [U, T] {
+//   return [value2, value1];
+// }
+
+// const reversedPair = reversePair("hello", 20);
+// console.log(reversedPair);
+
+// --- genric classes
+// class Box<T> {
+//   private content: T;
+
+//   constructor(initialContent: T) {
+//     this.content = initialContent;
+//   }
+
+//   getContent(): T {
+//     return this.content;
+//   }
+
+//   setContent(newContent: T): void {
+//     this.content = newContent;
+//   }
+// }
+
+// const stringBox = new Box<string>("Hello, Typescript");
+// console.log(stringBox.getContent());
+
+// stringBox.setContent("New Content Added");
+// console.log(stringBox.getContent());
+
+// const numberBox = new Box<number>(20);
+// console.log(numberBox.getContent());
+
+// numberBox.setContent(100);
+// console.log(numberBox.getContent());
+
+// ---------- Type Narrowing ---------------
+// -- Type guards
+
+// type MyType = string | number;
+
+// function exampleFunction(value: MyType): void {
+//   if (typeof value === "string") {
+//     console.log(value.toUpperCase());
+//   } else {
+//     console.log(value.toFixed(2));
+//   }
+// }
+
+// exampleFunction("hello");
+// exampleFunction(20);
+
+// -- instanceof operator
+// class Dog {
+//   bark(): void {
+//     console.log("woff woff");
+//   }
+// }
+
+// class Cat {
+//   meow(): void {
+//     console.log("Meow");
+//   }
+// }
+
+// function animalSound(animal: Dog | Cat): void {
+//   if (animal instanceof Dog) {
+//     animal.bark();
+//   } else {
+//     animal.meow();
+//   }
+// }
+
+// const myDog = new Dog();
+// const myCat = new Cat();
+
+// animalSound(myDog);
+// animalSound(myCat);
+
+// -- intersection types [&]
+// type Employee = {
+//   id: number;
+//   name: string;
+// };
+
+// type Manager = {
+//   department: string;
+//   role: string;
+// };
+
+// type ManagerWithEmployeeInfo = Employee & Manager;
+
+// const manager: ManagerWithEmployeeInfo = {
+//   id: 123,
+//   name: "Alex Merson",
+//   department: "Engineering",
+//   role: "Team Lead",
+// };
+
+// console.log(manager.id);
+// console.log(manager.name);
+// console.log(manager.department);
+// console.log(manager.role);
+
+//----------------
+const add = (x: number, y: number): number => x + y;
