@@ -35,10 +35,18 @@
     // Recommended Options
     "strict": true,
     "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": false,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-  }
+  },
+  // ignore files
+  // "files": ["index.ts"],
+  // include all files
+  // "include": ["src/**/*"],
+  // include one file
+    //  "include": ["src/index.ts"],
+    //  not complile mult.ts
+//  "exclude": ["src/mult.ts"]
 }
